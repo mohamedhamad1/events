@@ -1,0 +1,39 @@
+<%- include('../partials/header.ejs') %>
+<%- include('../partials/navbar.ejs') %>
+<div class="container mt-5">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="dashboard-tab" data-toggle="tab" href="#dashboard" role="tab" aria-controls="dashboard" aria-selected="true">Dashboard</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="events-tab" data-toggle="tab" href="#events" role="tab" aria-controls="events" aria-selected="false">Events</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="users-tab" data-toggle="tab" href="#users" role="tab" aria-controls="users" aria-selected="false">Users</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
+            <!-- Content for Users tab -->
+            <%- include('./dashboard.ejs') %>
+        </div>
+        <div class="tab-pane fade" id="events" role="tabpanel" aria-labelledby="events-tab">
+            <!-- Content for Events tab -->
+            <h2>Events</h2>
+            <a href="/events/create" class="btn btn-primary">Add New</a>
+            <% if (eventCount) { %>
+                <a href="/users/admin-panel/deleteEvents" class="btn btn-danger">Delete all</a>
+            <% } %>
+            <%- include('./allEvents.ejs') %>
+        </div>
+        <div class="tab-pane fade" id="users" role="tabpanel" aria-labelledby="users-tab">
+            <!-- Content for Users tab -->
+            <h2>Users</h2>
+            <% if (userCount>1) { %>
+                <a href="/users/admin-panel/deleteUsers" class="btn btn-danger">Delete all</a>
+            <% } %>
+            <%- include('./allUsers.ejs') %>
+        </div>
+    </div
+
+<%- include('../partials/footer.ejs') %>

@@ -1,0 +1,108 @@
+<%- include('../partials/header.ejs') %> <%- include('../partials/navbar.ejs') %>
+<div class="continer custom-container mx-auto">
+    <div class="row mt-3">
+        <div class="col-md-2 text-center">
+            <img src="/images/<%= user.avatar %>" class="img-fluid rounded-circle profile-photo" alt="Profile Image">
+        </div>
+        <div class="col-md-8">
+            <h1 class="display-4"><%= user.username %></h1>
+        </div>
+    </div>
+    
+    <hr>
+    </h1>
+    <div class="row mt-3">
+        <%- include('../partials/flshMessages.ejs') %>
+        <div class="col-md-5">
+            <h2>My Events</h2>
+            <% if (eventsFound) { %>
+                <button class="btn btn-danger" onclick="deleteAllEvent()" id="deleteAllBtn">Delete All</button>
+            <% } else { %>
+                <h6 style="color: gray;">
+                    No events found, Add new one 
+                </h6>
+                <a href="/events/create" class="btn btn-primary">Add</a>
+            <% } %>
+            <% chunk.forEach(col=> { %>
+                <div class="row mt-3" id="paginationContainer">
+                    <% col.forEach(event=> { %>
+                    <div class="col-sm-6 col-md-4">
+                        <div class="card" >
+                            <div class="card-body custom-card">
+                                <h6 class="card-title">
+                                    <%= event.title %>
+                                </h6>
+                                <p class="card-text">
+                                    <%= event.description %>
+                                </p>
+                                <a href="/events/<%= event._id %>" class="btn btn-sm btn-primary">Show More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>
+                </div>
+            <% }) %>
+            <div class="row ">
+                <div class="col-12 mt-2 mb-4">
+                    <nav aria-label="...">
+                        <ul class="pagination pagination-md justify-content-center">
+                            <% for( let i=1; i <=Math.ceil(count/limit); i++ ) { %>
+                                <li class="page-item">
+                                    <% if (i==page) { %>
+                                        <span class="page-link active">
+                                            <%= i %>
+                                        </span>
+                                    <% } else { %>
+                                        <a class="page-link" href="/users/profile?page=<%= i %>">
+                                            <%= i %>
+                                        </a>
+                                    <% } %>
+                                </li>
+                            <% } %>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h2>User Information</h2>
+            <form id="profileForm" method="POST">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" disabled
+                    value="<%= user.email %>" name="email" />
+                </div>
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" class="form-control" id="username" disabled
+                    value="<%= user.username %>" name="username" />
+                </div>
+                <div class="form-group">
+                    <label for="password">Old Password:</label>
+                    <input type="password" class="form-control" id="password" disabled
+                    name="password" />
+                </div>
+                <div class="form-group">
+                    <label for="new_password">New Password:</label>
+                    <input type="password" class="form-control" id="new_password" disabled
+                    name="new_password" />
+                </div>
+                <button type="button" class="btn btn-primary mt-2" id="editBtn">
+                    Edit
+                </button>
+                <button type="submit" class="btn btn-success d-none mt-2" id="saveBtn">
+                    Save
+                </button>
+            </form>
+            <form action="/users/uploadAvatar" method="post" enctype="multipart/form-data">
+                <label for="avatar" class="col-sm-2 col-form-label">Profile Avatar:</label>
+                <div class="input-group mb-3">
+                    <input type="file" class="form-control" id="avatar" name="avatar">
+                    <button type="submit" id="uploadBtn" class="input-group-text btn" disabled>Upload</button>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+</div>
+                    <%- include('../partials/footer.ejs') %>

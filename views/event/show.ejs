@@ -1,0 +1,71 @@
+<%- include('../partials/header.ejs') %>
+<%- include('../partials/navbar.ejs') %>
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-md-8 offset-md-1 mx-auto">
+            <%- include('../partials/flshMessages.ejs') %>
+            <div class="card">
+                <div class="row mt-2">
+                    <div class="col-sm-2 text-center">
+                        <img src="/images/<%= event.user_avatar %>" class="profile-photo" alt="Profile Image" style="width: 80px; height: 80px; border-radius: 15px;">
+                    </div>
+                    <div class="col">
+                        <h6 class="display-6"><%= event.user_name %></h6>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <hr>
+                    <h5 class="card-title"><%= event.title %></h5>
+                    <p class="card-text"><%= event.description %></p>
+                    <p>Location: <i><%= event.location %></i></p>
+                    <p><span class="badge badge-secondary"><%= event.date.toDateString() %></span></p>
+                    <% if (user && (user.id == event.user_id || user.role == 'ADMIN' || user.role == 'ROOT')) { %>
+                        <a href="/events/edit/<%= event._id %>" class="btn btn-primary">Edit</a>
+                        <button class="btn btn-danger" onclick="deleteEvent()" id="deleteBtn" data-id="<%= event._id %>">Delete</button>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-8 mx-auto mb-3">
+            <h6 class="display-6">Comments</h6>
+            <div class="comments-container">
+                <div class="comments" id="commentsList">
+                <% if (comments.length) { %>
+                    <% comments.forEach(comment => { %>
+                            <div class="comment">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="user"><%= comment.user_name %></div>
+                                    </div>
+                                    <div class="col-md-6 text-end">
+                                        <div class="timestamp"><%= comment.createdAt %> </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <div class="content"><%= comment.commentText %></div>
+                                    </div>
+                                    <div class="col-md-2 text-center">
+                                        <% if (user && (user.id == comment.user_id || user.role == 'ADMIN' || user.role == 'ROOT')) { %>
+                                            <a class="btn btn-secondary" href="/events/deleteComment/<%= comment._id %>" id="deleteCommentBtn">Delete</a>
+                                        <% }%>
+                                    </div>
+                                </div>
+                            </div>
+                    <% }) %>
+                <% } %>
+                </div>
+            </div>
+            <% if (user) { %>
+                <div class="row mt-1 comment-form mx-auto">
+                    <input type="text" name="commentText" id="commentInput" placeholder="Type your comment">
+                    <button id="submitCommentBtn" class="commentBtn mx-auto" onclick="submitComment()" data-id="/events/<%= event._id %>">Submit</button>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer.ejs') %>

@@ -1,0 +1,91 @@
+.badge-secondary {
+    background-color: rgb(100, 99, 94);
+}
+
+input:disabled {
+    color: gray !important;
+}
+
+.custom-container {
+    max-width: 1500px;
+    /* Adjust the maximum width as needed */
+}
+.profile-photo {
+    width: 150px; /* Adjust the width as needed */
+    height: 150px; /* Adjust the height as needed */
+    border: 2px solid #ccc; /* Example border */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Example box shadow */
+    /* Add more styles as desired */
+}
+
+.custom-card {
+    font-size: small;
+}
+.comment-form{
+    width: 50%;
+}
+.comment-form input{
+    height: 50px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+.comment-form button{
+    padding: 5px 10px;
+    background-color: #007bff;
+    width: 20%;
+    color: #fff;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+}
+.comment-form button:hover{
+    background-color: #02448a;
+}
+.comments-container {
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    top: 50px;
+    right: 20px; 
+    width: 80%; 
+    height: 400px;
+    overflow-y: auto; 
+}
+
+.comment {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #eee;
+    border-radius: 20px;
+    background-color: #d9d7d7;
+}
+
+.comment .user {
+    font-weight: bold;
+}
+
+.comment .timestamp {
+    margin-left: auto;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 0.8em;
+    color: #777;
+}
+
+.comment .content {
+    margin-left: 10px;
+}
+
+#deleteCommentBtn{
+    margin-left: auto;
+    padding: 5px 10px;
+    font-size: 10px;
+}
+/*------------------------------- */
+.admin{
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #eee;
+    border-radius: 20px;
+    background-color: #d9d7d7;
+}

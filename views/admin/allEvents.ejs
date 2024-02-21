@@ -1,0 +1,47 @@
+<%- include('../partials/header.ejs') %>
+<div class="container">
+    <%- include('../partials/flshMessages.ejs') %>
+    <% eventChunk.forEach(col => { %>
+        <div class="row mt-3">
+            <% col.forEach(event => { %>
+                <div class="col-sm-6 col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <img src="/images/<%= event.user_avatar %>" class="profile-photo" alt="Profile Image" style="width: 70px; height: 70px; border-radius: 15px;">
+                                </div>
+                                <div class="col-sm-9">
+                                    <h6 class="display-6"><%= event.user_name %></h6>
+                                </div>
+                            </div>
+                            <hr>
+                            <h5 class="card-title"><%= event.title %></h5>
+                            <p class="card-text"><%= event.description %></p>
+                            <a href="/events/<%= event._id %>" class="btn btn-primary">Show More</a>
+                            <a href="/users/admin-panel/deleteEvents/<%= event._id %>" class="btn btn-danger">Delete</a>
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+        </div>
+    <% }) %>
+    <div class="row">
+        <div class="col-12 mt-2 mb-4">
+            <nav aria-label="...">
+                <ul class="pagination pagination-md justify-content-center">
+                    <% for( let i = 1; i <= Math.ceil(eventCount/eventLimit); i++ ) { %>
+                        <li class="page-item">
+                            <% if (i == eventPage) { %>
+                                <span class="page-link active"><%= i %></span>
+                            <% } else { %>
+                                <a class="page-link" href="/users/admin-panel?eventPage=<%= i %>"><%= i %></a>
+                            <% } %>
+                        </li>
+                    <% } %>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+<%- include('../partials/footer.ejs') %>

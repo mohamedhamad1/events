@@ -1,0 +1,50 @@
+<%- include('../partials/header.ejs') %>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4">
+            <!-- Admin information -->
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Admins Information</h5>
+                    <hr>
+                    <p class="card-text">Total Admins: <%= adminCount %></p>
+                    <% if (locals.user.role == 'ROOT') { %>
+                        <% admins.forEach(admin => { %>
+                            <div class="admin">
+                                <h6 class="card-text">Username: <%= admin.username %></h6>
+                                <p class="card-text">Email: <%= admin.email %></p>
+                                <a href="/users/admin-panel/deleteAdmin/<%= admin._id %>" class="btn btn-dark">Remove admin</a>
+                                <a href="/users/admin-panel/deleteUsers/<%= admin._id %>" class="btn btn-danger">Delete user</a>
+                            </div>
+                        <% }) %>
+                    <% } %>
+                    <!-- Add more admin details as needed -->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <!-- User count -->
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">User Count</h5>
+                    <hr>
+                    <p class="card-text">Total Users: <%= userCount %></p>
+                    <!-- You can show more user-related information here -->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <!-- Event count -->
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Event Count</h5>
+                    <hr>
+                    <p class="card-text">Total Events: <%= eventCount %></p>
+                    <!-- You can show more event-related information here -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer.ejs') %>

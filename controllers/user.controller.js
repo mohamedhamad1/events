@@ -157,7 +157,7 @@ const adminPanel = async (req, res) => {
     const eventLimit = 9
     const eventPage = req.query.eventPage || 1
     const eventSkip = eventLimit * (eventPage - 1)
-    const eventCount = await Event.countDocuments();
+    const eventCount = Event.countDocuments();
     let events = await Event.find({}).skip(eventSkip).limit(eventLimit);
     let eventChunk = [];
     let eventChunkSize = 3;
@@ -167,7 +167,7 @@ const adminPanel = async (req, res) => {
     const userLimit = 9
     const userPage = req.query.eventPage || 1
     const skip = userLimit * (userPage - 1)
-    const userCount = await User.countDocuments();
+    const userCount = await User.countDocuments({role:'USER'})
     let users = await User.find({role:'USER'}).skip(skip).limit(userLimit);
     let userChunk = [];
     let userChunkSize = 3;

@@ -5,19 +5,7 @@ const { check } = require('express-validator')
 const eventController = require('../controllers/event.controller');
 const passport = require('passport');
 const isAuthenticated = require('../middlewares/isAuthenticated')
-const multer = require('multer');
 const allowedTo = require('../middlewares/allowedTo')
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'uploads/images')
-    },
-    filename: function (req, file, cb) {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9) + '.jpg'
-        cb(null, file.fieldname + '-' + uniqueSuffix)
-    }
-})
-
-const upload = multer({ storage: storage })
 //login routers
 router.route('/login')
     .get(userController.loginPage)
@@ -48,9 +36,6 @@ router.route('/profile')
         check('email').isLength({ min: 1 }).withMessage('email is required'),
     ], isAuthenticated, userController.editProfileInfo)
     .delete(isAuthenticated, userController.deletAllMyEvents)
-
-router.route('/uploadAvatar')
-    .post(isAuthenticated, upload.single('avatar'), userController.uploadAvatar)
 
 //admin-panel routes
 router.route('/admin-panel')

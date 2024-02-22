@@ -157,7 +157,7 @@ const adminPanel = async (req, res) => {
     const eventLimit = 9
     const eventPage = req.query.eventPage || 1
     const eventSkip = eventLimit * (eventPage - 1)
-    const eventCount = Event.countDocuments();
+    const eventCount = await Event.countDocuments();
     let events = await Event.find({}).skip(eventSkip).limit(eventLimit);
     let eventChunk = [];
     let eventChunkSize = 3;

@@ -11,13 +11,26 @@ input:disabled {
     /* Adjust the maximum width as needed */
 }
 .profile-photo {
+    object-fit: cover;
     width: 150px; /* Adjust the width as needed */
     height: 150px; /* Adjust the height as needed */
     border: 2px solid #ccc; /* Example border */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Example box shadow */
     /* Add more styles as desired */
 }
-
+.card-index{
+    height: 350px;
+}
+.card-title-index{
+    height: 30px;
+    overflow-y: hidden;
+    max-width: 200px;
+}
+.card-text-index{
+    height: 50px;
+    overflow-y: hidden;
+    max-width: 200px;
+}
 .custom-card {
     font-size: small;
 }

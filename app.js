@@ -20,6 +20,7 @@ app.set('view engine', 'ejs');
 
 //static files
 app.use(express.static('public'));
+app.use(express.static('uploads'));
 app.use(express.static('node_modules'));
 
 //session and flash configuration

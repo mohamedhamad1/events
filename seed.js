@@ -8,7 +8,7 @@ for (let i = 1; i <= 50; i++) {
         description:`event ${i} description`,
         location:'egypt',
         date: Date.now(),
-        user_id:'111'
+        user_id:'222'
     })
     newUser.save();
 }
